@@ -1,0 +1,87 @@
+/*
+ * This program draw a checkerboard. The dimensions of the chekerboard are
+ * specified by the constants N_ROWS and N_COULMNS, and the size of the 
+ * square is chosen so that the checkerboard fills the available vertical space.
+ */
+
+//Art Science Java - Chapter 4 - Exercise 14 - Checkerboard
+
+import acm.program.*;
+import java.awt.*;
+import acm.graphics.*;
+
+public class Checkerboard extends GraphicsProgram {
+	
+	public void run() {
+		displayCheckerboard();
+	}
+	
+	//This method display a checkerboard with its peaces
+	private void displayCheckerboard() {
+		double squareSize = (dimension.getHeight() - VERTICAL_MARGIN * 2) /N_ROWS;		
+		
+		for(int i = 0; i < N_ROWS; i++) {
+			
+			for(int j = 0; j < N_COLUMNS; j++) {
+				double x = dimension.getWidth()/2 - N_COLUMNS * squareSize/2 + j * squareSize;
+				double y = VERTICAL_MARGIN/2 + i * squareSize;
+				
+				//Building the checkerboard
+				displaySquare(i, j, x, y, squareSize);
+				
+				//Building the peaces at the initial position
+				double peaceRadius = squareSize*PEACE_SQUARE_PROPORTION;
+				displayPeace(i, j, x, y, squareSize, peaceRadius);
+			}		
+		}
+	}
+	
+	/* This method display the peaces of a checkerboard.
+	 * the Method use as arguments i and j as index of the square of the board,
+	 * x and y as coordinates, sqSize as size of a square of the board and
+	 * peaceRadius as the radius of the peace (should be smaller than the square size) 
+	 */
+	private void displayPeace(int i, int j, double x, double y, double sqSize, double peaceRadius) {
+		if(isDarkSquare(i , j) && ((i < 3) || (i > 4))) { //The second part of the conditional is the empty lines of the board
+			//Radius of a peace
+			
+			GOval peace = new GOval(x+(sqSize-peaceRadius)/2, y+(sqSize-peaceRadius)/2,
+					peaceRadius, peaceRadius);
+			peace.setFilled(true);
+			add(peace);
+			if(i < 3) peace.setColor(Color.RED);
+			else peace.setColor(Color.BLACK);
+		}
+	}
+	
+	/* This method display the squares of a checkerboard.
+	 * the Method use as arguments i and j as index of the square of the board,
+	 * x and y as coordinates and sqSize as size of a square of the board) 
+	 */
+	private void displaySquare(int i, int j, double x, double y, double sqSize) {
+		GRect rect = new GRect(x, y, sqSize, sqSize);
+		if(isDarkSquare(i , j)) {
+			rect.setFilled(true);
+			rect.setColor(Color.GRAY);
+			}
+		add(rect);
+	}
+	
+	//This method receives as argument the indexes of the checker board and return true
+	// if the position is black (when sum of the indexes are even) 
+	private boolean isDarkSquare(int i, int j) {
+		if((i + j) % 2 == 0) return true;
+		return false;
+	}
+	
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	/* Private constants */
+	/*  The proportions of the radius of a peace in relation to the size of
+	 *  a square side
+	 */
+	private static final double PEACE_SQUARE_PROPORTION = 0.8;
+	private static final int N_ROWS = 8;
+	private static final int N_COLUMNS = 8;
+	private static final int VERTICAL_MARGIN = 100;
+}
