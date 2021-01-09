@@ -1,0 +1,84 @@
+/*
+ * File: Exercises_Chapter4
+ * ----------------------------------------------
+ * This program display a ball and animated it inside the boundaries of
+ * the graphic window.
+ */
+
+//Art Science Java - Chapter 4 - Exercise 15 - BoucingBall
+
+package exercises_chapter_04;
+
+import acm.program.*;
+import acm.graphics.*;
+import java.awt.*;//To use colors
+
+public class BouncingBall extends GraphicsProgram {
+
+	public void run() {
+		GOval ball = getBall(RADIUS_BALL,COLOR_BALL,FILLED_BALL);
+		add(ball);
+
+		while(true) {
+			checkForCollision(ball);
+			ball.move(dx, dy);
+			pause(PAUSE_TIME);
+		}
+	}
+	
+	//This method create a GOval object that is circle with the radius, color and 
+	//filled of the arguments
+	private GOval getBall(int radius, Color color,boolean filled) {
+		double x = (getWidth() - RADIUS_BALL * 2) / 2;
+		double y = (getHeight() - RADIUS_BALL * 2) / 2;
+		GOval ball = new GOval(x, y, RADIUS_BALL * 2, RADIUS_BALL * 2);
+		ball.setColor(color);
+		ball.setFilled(filled);
+		return ball;
+	}
+	
+	//This method check if the ball is in the or over the edges and if it is true the method
+	//correct the position of the ball and change the signal of velocity of the ball	
+	private void checkForCollision(GOval ball) {
+		
+		//Checking the left boundarie
+		if(ball.getX() <= LEFT_BOUNDAIRIE)  {			
+			double dif = LEFT_BOUNDAIRIE - ball.getX(); //part of the ball that is outside the boundaries
+			ball.move(dif, 0);
+			dx *= -1;			
+		}
+		
+		//Checking the right boundarie
+		if(ball.getX() + ball.getWidth() >= getWidth())  {			
+			double dif = getWidth() - (ball.getX() + ball.getWidth()); //part of the ball that is outside the boundaries
+			ball.move(dif, 0);
+			dx *= -1;			
+		}
+		
+		//Checking the upper boundarie
+		if(ball.getY() <= UPPER_BOUNDAIRIE)  {
+			double dif = UPPER_BOUNDAIRIE - ball.getY(); //part of the ball that is outside the boundaries
+			ball.move(0, dif);
+			dy *= -1;			
+		}
+		
+		//Checking the bottom boundarie
+		if(ball.getY() + ball.getHeight() >= getHeight())  {			
+			double dif = getHeight() - (ball.getY() + ball.getHeight()); //part of the ball that is outside the boundaries
+			ball.move(0, dif);
+			dy *= -1;			
+		}
+		
+	}
+	
+
+	private double LEFT_BOUNDAIRIE = 0;
+	private double UPPER_BOUNDAIRIE = 0;
+
+	private static final int PAUSE_TIME = 20;
+	private static final int RADIUS_BALL =25;
+	private static final Color COLOR_BALL = Color.BLUE;
+	private static final boolean FILLED_BALL = true;
+	private double dx = 1; //velocity in the x cordinate
+	private double dy = 1; //velocity in the x cordinate
+}
