@@ -1,13 +1,9 @@
 /*
- * File: Exercises_Chapter4
- * ----------------------------------------------
  * This program display a ball and animated it inside the boundaries of
  * the graphic window.
  */
 
 //Art Science Java - Chapter 4 - Exercise 15 - BoucingBall
-
-package exercises_chapter_04;
 
 import acm.program.*;
 import acm.graphics.*;
