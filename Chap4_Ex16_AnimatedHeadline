@@ -1,13 +1,9 @@
 /*
- * File: Exercises_Chapter4
- * ----------------------------------------------
  * This program display animated headline like that which show
  * the stock prices
  */
 
 //Art Science Java - Chapter 4 - Exercise 16 - Animated Headline
-
-package exercises_chapter_04;
 
 import acm.program.*;
 import acm.graphics.*;
