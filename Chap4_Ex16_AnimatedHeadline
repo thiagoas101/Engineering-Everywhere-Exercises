@@ -1,0 +1,86 @@
+/*
+ * File: Exercises_Chapter4
+ * ----------------------------------------------
+ * This program display animated headline like that which show
+ * the stock prices
+ */
+
+//Art Science Java - Chapter 4 - Exercise 16 - Animated Headline
+
+package exercises_chapter_04;
+
+import acm.program.*;
+import acm.graphics.*;
+import java.awt.*;
+
+public class AnimatedHeadline extends GraphicsProgram {
+
+	public void run() {
+		GLabel label = setupHeadline();
+		
+		while(true) {
+			
+			for(int i = 0; i < 3; i++ ) {
+				label.setLabel(getMessage(i));
+				
+				while(label.getX()+label.getWidth()>0) {
+					label.move(DISPLACE, 0);
+					pause(PAUSE_TIME);
+				}
+				
+				restartLabelPosition(label);
+			}
+			
+		}
+		
+	}
+	
+	//This method display the black rectangle and the label of the animation
+	private GLabel setupHeadline() {
+		//Rectangle
+		GRect rect = new GRect(X_RECT,Y_RECT,dimension.getWidth(),HEIGHT_RECT);
+		rect.setFilled(true);
+		rect.setColor(Color.BLACK);
+		add(rect);
+		
+		//Label
+		GLabel label = new GLabel("Empty label");
+		Font labelFont = new Font("Mosospaced", Font.BOLD, 40);
+		label.setFont(labelFont);
+		label.setColor(Color.GREEN);
+		label.setLocation(dimension.getWidth(),Y_LABEL+HEIGHT_RECT-(HEIGHT_RECT-label.getAscent()));
+		add(label);
+		
+		return label;
+	}
+	
+	//reset the initial position of the label
+	private void restartLabelPosition(GLabel label) {
+		label.setLocation(dimension.getWidth(),Y_LABEL+HEIGHT_RECT-(HEIGHT_RECT-label.getAscent()));
+	}
+	
+	//return a message depends on the index
+	private String getMessage(int index) {
+		switch(index) {
+		  case 0:
+		      return "Pixar lança filme sobre viagem no tempo";
+		  case 1:
+			  return "Ibovespa fecha em alta de 2%";
+		  case 2:
+			  return "São Paula ganha do Ferroviário por 3 x 1";
+		  default:
+			  return "Erro";
+		}
+	}
+
+	//get the dimension of the screensize
+	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	private static final double Y_LABEL = 50;
+	private static final double Y_RECT = 50;
+	private static final double X_RECT = 0;
+	private static final double HEIGHT_RECT = 50;
+	private static final double PAUSE_TIME = 5;
+	private static final double DISPLACE = -1;
+	
+}
