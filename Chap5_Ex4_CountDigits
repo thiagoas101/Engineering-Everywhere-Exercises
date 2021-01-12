@@ -1,0 +1,62 @@
+/*
+ * This program test a method which count digits of a integer number
+ */
+
+//Art Science Java - Chapter 5 - Exercise 4 - Counter of Digits
+
+
+package exercises_chapter_05;
+
+import acm.program.*;
+
+public class CountDigits extends ConsoleProgram {
+	
+	public void run() {
+		println("This program test a method which count digits of a integer number");
+		
+		for(int i = 0; i < TESTS; i++ ) {
+			println(getNumber(i) + " = " + "has " + countDigits(getNumber(i)) + " digit(s)");
+		}
+	}
+	
+	
+	//This method recives a index as parameter and return a number which corresponding that index
+	private int getNumber(int index) {
+		switch(index){
+		  case 0: return TEST_0;
+		  case 1: return TEST_1;
+		  case 2: return TEST_2;
+		  case 3: return TEST_3;
+		  case 4: return TEST_4;
+		  case 5: return TEST_5;
+		  case 6: return TEST_6;
+		  case 7: return TEST_7;
+		  case 8: return TEST_8;	
+		  case 9: return TEST_9;
+		  default:
+			  return 0;
+		}
+	}
+	
+	//This method returns the number of digits of a number
+	private int countDigits(int num ) {
+		int count = 1;
+		while (num / 10 >= 1) {
+			num /= 10;
+			count ++;
+		}
+		return count;
+	}
+
+	private static final int TESTS = 10;
+	private static final int TEST_0 = 0;
+	private static final int TEST_1 = 01;
+	private static final int TEST_2 = 10;
+	private static final int TEST_3 = 001;
+	private static final int TEST_4 = 100;
+	private static final int TEST_5 = 0004;
+	private static final int TEST_6 = 1000;
+	private static final int TEST_7 = 10101;
+	private static final int TEST_8 = 101010;
+	private static final int TEST_9 = 1010101;
+}
