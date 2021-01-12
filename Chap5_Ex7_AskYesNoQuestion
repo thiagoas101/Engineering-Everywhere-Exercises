@@ -1,0 +1,78 @@
+/*
+ * This program test a method that ask and recognize answers Yes or No
+ */
+
+//Art Science Java - Chapter 5 - Exercise 7 - Ask Yes or No Question
+
+package exercises_chapter_05;
+
+import acm.program.*;
+
+public class AskYesNoQuestion extends DialogProgram {
+	
+	public void run () {
+		println("This is the Yes or No Question game. Please answer just Yes or No.");
+		int count = 0;
+		
+		for(int i = 0 ; i < NUM_OF_QUESTIONS; i++ ) {
+			String answer = readLine(getQuestion(i));
+			
+			//If the user digit anything else different from Yes or No 
+			while(!answer.equalsIgnoreCase("Yes")&&!answer.equalsIgnoreCase("No")) {
+				println("Please answer Yes or No");
+				answer = readLine(getQuestion(i));
+			}
+			
+			if(answer.equalsIgnoreCase(getAnswer(i))) {
+			  println("Correct!");
+			  count++;
+			} else println("Wrong :(");
+		}
+		
+		println("You have got " + count + " right answers.");
+	}
+	//This methods get a question below associated to the index
+	private String getQuestion(int index) {
+		switch(index){
+		  case 0: return QUESTION_0;
+		  case 1: return QUESTION_1;
+		  case 2: return QUESTION_2;
+		  case 3: return QUESTION_3;
+		  case 4: return QUESTION_4;
+		  case 5: return QUESTION_5;
+		  default:
+			  return "Error";
+		}
+	}
+	
+	//This methods get the answer to the question above
+	private String getAnswer(int index) {
+		switch(index){
+		  case 0: return ANSWER_0;
+		  case 1: return ANSWER_1;
+		  case 2: return ANSWER_2;
+		  case 3: return ANSWER_3;
+		  case 4: return ANSWER_4;
+		  case 5: return ANSWER_5;
+		  default:
+			  return "Error";
+		}
+	}
+	
+	private static final int NUM_OF_QUESTIONS = 6;
+	
+	private static final String QUESTION_0 = "Was Brazil discovered before 1500?";
+	private static final String QUESTION_1 = "Is Hydrogen The most light atom?";
+	private static final String QUESTION_2 = "Is China the biggest country in the world?";
+	private static final String QUESTION_3 = "1 + 1 <= 2?";
+	private static final String QUESTION_4 = "Is Harry Potter the most read book in world?";
+	private static final String QUESTION_5 = "Is Bill Gates the most rich guy in the world?";
+	
+	private static final String ANSWER_0 = "Yes";
+	private static final String ANSWER_1 = "Yes";
+	private static final String ANSWER_2 = "No";
+	private static final String ANSWER_3 = "Yes";
+	private static final String ANSWER_4 = "No";
+	private static final String ANSWER_5 = "No";
+	
+}
