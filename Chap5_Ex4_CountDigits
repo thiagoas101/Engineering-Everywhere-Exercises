@@ -41,7 +41,7 @@ public class CountDigits extends ConsoleProgram {
 	//This method returns the number of digits of a number
 	private int countDigits(int num ) {
 		int count = 1;
-		while (num / 10 >= 1) {
+		while ((double) num / 10 >= 1) {
 			num /= 10;
 			count ++;
 		}
